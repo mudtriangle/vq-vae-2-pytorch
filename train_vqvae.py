@@ -96,7 +96,7 @@ def main(args):
     )
 
     if 'disc21' in args.path:
-        dataset = datasets.DatasetFolder(args.path, transform=transform)
+        dataset = datasets.DatasetFolder(args.path, loader=datasets.default_loader, transform=transform)
     else:
         dataset = datasets.ImageFolder(args.path, transform=transform)
     sampler = dist.data_sampler(dataset, shuffle=True, distributed=args.distributed)
