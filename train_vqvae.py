@@ -7,13 +7,15 @@ from torch import nn, optim
 from torch.utils.data import DataLoader
 
 from torchvision import datasets, transforms, utils
-from torchvision.datasets.folder import default_loader
 
 from tqdm import tqdm
 
 from vqvae import VQVAE
 from scheduler import CycleScheduler
 import distributed as dist
+
+# Customisations
+from disc21_dataset import DISC21
 
 
 def train(epoch, loader, model, optimizer, scheduler, device):
@@ -97,7 +99,7 @@ def main(args):
     )
 
     if 'disc21' in args.path:
-        dataset = datasets.DatasetFolder(args.path, loader=default_loader, transform=transform)
+        dataset = DISC21(args.path, transform=transform)
     else:
         dataset = datasets.ImageFolder(args.path, transform=transform)
     sampler = dist.data_sampler(dataset, shuffle=True, distributed=args.distributed)
