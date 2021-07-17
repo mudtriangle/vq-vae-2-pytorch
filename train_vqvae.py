@@ -95,7 +95,10 @@ def main(args):
         ]
     )
 
-    dataset = datasets.ImageFolder(args.path, transform=transform)
+    if 'disc21' in args.path:
+        dataset = datasets.DatasetFolder(args.path, transform=transform)
+    else:
+        dataset = datasets.ImageFolder(args.path, transform=transform)
     sampler = dist.data_sampler(dataset, shuffle=True, distributed=args.distributed)
     loader = DataLoader(
         dataset, batch_size=128 // args.n_gpu, sampler=sampler, num_workers=2
