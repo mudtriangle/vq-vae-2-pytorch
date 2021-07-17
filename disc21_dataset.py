@@ -22,4 +22,4 @@ class DISC21(DatasetFolder):
         if not os.path.isdir(directory):
             raise FileNotFoundError(f'{directory} is not a valid directory.')
 
-        return '.', {'.': 0}
+        return '', {'': 0}
