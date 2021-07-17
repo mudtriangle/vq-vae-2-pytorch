@@ -3,7 +3,7 @@ import os
 from typing import Any, Callable, cast, Dict, List, Optional, Tuple
 
 
-class DISC21(ImageFolder):
+class DISC21(DatasetFolder):
     def __init__(
             self,
             root: str,
